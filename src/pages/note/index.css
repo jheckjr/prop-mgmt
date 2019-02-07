@@ -1,0 +1,8 @@
+.notes form {
+  padding-bottom: 15px;
+}
+
+.notes form textarea {
+  height: 300px;
+  font-size: 24px;
+}
