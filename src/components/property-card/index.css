@@ -1,0 +1,68 @@
+.property-card-container {
+  display: grid;
+  grid-template:
+    "property-card-address property-card-address" auto
+    "property-card-tenant-header property-card-tenant-header" auto
+    "property-card-tenant-name property-card-tenant-name" auto
+    "property-card-rent-header property-card-date-header" auto
+    "property-card-rent property-card-date" auto
+    "property-card-term-header property-card-term-header" auto
+    "property-card-term property-card-term" auto
+    "property-card-status-header property-card-status-header" auto
+    "property-card-status property-card-status" auto
+    / 1fr 1fr;
+  max-width: 350px;
+  border: 1px solid #999;
+  border-radius: 0.4em;
+  padding: 0.6em;
+}
+
+.property-card-address {
+  grid-area: property-card-address;
+  margin-top: 0;
+}
+
+.property-card-tenant-header {
+  grid-area: property-card-tenant-header;
+}
+
+.property-card-tenant-name {
+  grid-area: property-card-tenant-name;
+}
+
+.property-card-rent-header {
+  grid-area: property-card-rent-header;
+}
+
+.property-card-date-header {
+  grid-area: property-card-date-header;
+}
+
+.property-card-rent {
+  grid-area: property-card-rent;
+}
+
+.property-card-date {
+  grid-area: property-card-date;
+}
+
+.property-card-term-header {
+  grid-area: property-card-term-header;
+}
+
+.property-card-term {
+  grid-area: property-card-term;
+}
+
+.property-card-status-header {
+  grid-area: property-card-status-header;
+}
+
+.property-card-status {
+  grid-area: property-card-status;
+}
+
+h5 {
+  padding: 0;
+  margin: 0;
+}
