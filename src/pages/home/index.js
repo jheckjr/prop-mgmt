@@ -3,7 +3,7 @@ import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap';
 import { API } from 'aws-amplify';
 import { Link } from 'react-router-dom';
-import PropertyCard from 'components/property-card';
+import PropertyCard from '../../components/property-card';
 
 import "./index.css";
 
@@ -16,40 +16,58 @@ export default class HomePage extends Component {
       notes: []
     };
   }
-  
+
   async componentDidMount() {
     if (!this.props.isAuthenticated) {
       return;
     }
-  
+
     try {
       const notes = await this.notes();
       this.setState({ notes });
     } catch (e) {
       alert(e);
     }
-  
+
     this.setState({ isLoading: false });
   }
-  
+
   notes() {
     return API.get("notes", "/notes");
   }
 
   renderPropertyList(properties) {
+    let propertiesContent;
     if (properties.length === 0) {
-      return (
+      propertiesContent = (
         <div>
           No properties to show.
-        </div>;
+        </div>
+      );
+    } else {
+      propertiesContent = (
+        <div className="property-cards-container">
+          {
+            properties.map((property, idx) => {
+              return <PropertyCard key={idx} />
+            })
+          }
+        </div>
       );
     }
-    
-    return properties.map(property, idx) => {
-      return <PropertyCard key={idx} />;
-    };
+
+    return (
+      <React.Fragment>
+        <aside>
+          <ul>
+            <li>Home</li>
+          </ul>
+        </aside>
+        { propertiesContent }
+      </React.Fragment>
+    );
   }
-  
+
   renderNotesList(notes) {
     return [{}].concat(notes).map(
       (note, i) =>
@@ -104,9 +122,14 @@ export default class HomePage extends Component {
   }
 
   render() {
+    // return (
+    //   <div className="home">
+    //     {this.props.isAuthenticated ? this.renderNotes() : this.renderLander()}
+    //   </div>
+    // );
     return (
       <div className="home">
-        {this.props.isAuthenticated ? this.renderNotes() : this.renderLander()}
+        {this.renderPropertyList(['', '', '', ''])}
       </div>
     );
   }

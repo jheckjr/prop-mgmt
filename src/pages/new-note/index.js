@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { API } from 'aws-amplify';
-import LoaderButton from "components/loader-button";
-import config from "config";
-import { s3Upload } from 'libs/awsLib';
+import LoaderButton from '../../components/loader-button';
+import config from '../../config';
+import { s3Upload } from '../../libs/awsLib';
 
 import "./index.css";
 
@@ -43,22 +43,22 @@ export default class NewNotePage extends Component {
 
     this.setState({ isLoading: true });
   }
-  
+
   handleSubmit = async event => {
     event.preventDefault();
-  
+
     if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
       alert(`Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE/1000000} MB.`);
       return;
     }
-  
+
     this.setState({ isLoading: true });
-  
+
     try {
       const attachment = this.file
         ? await s3Upload(this.file)
         : null;
-  
+
       await this.createNote({
         attachment,
         content: this.state.content

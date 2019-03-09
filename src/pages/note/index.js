@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { API, Storage } from "aws-amplify";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import LoaderButton from "../components/loader-button";
-import config from "../config";
-import { s3Upload } from "../libs/awsLib";
+import LoaderButton from '../../components/loader-button';
+import config from '../../config';
+import { s3Upload } from '../../libs/awsLib';
 
 import './index.css';
 
@@ -49,44 +49,44 @@ export default class NotePage extends Component {
   validateForm() {
     return this.state.content.length > 0;
   }
-  
+
   formatFilename(str) {
     return str.replace(/^\w+-/, "");
   }
-  
+
   handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
   }
-  
+
   handleFileChange = event => {
     this.file = event.target.files[0];
   }
-  
+
   saveNote(note) {
     return API.put("notes", `/notes/${this.props.match.params.id}`, {
       body: note
     });
   }
-  
+
   handleSubmit = async event => {
     let attachment;
-  
+
     event.preventDefault();
-  
+
     if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
       alert(`Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE/1000000} MB.`);
       return;
     }
-  
+
     this.setState({ isLoading: true });
-  
+
     try {
       if (this.file) {
         attachment = await s3Upload(this.file);
       }
-  
+
       await this.saveNote({
         content: this.state.content,
         attachment: attachment || this.state.note.attachment
@@ -101,20 +101,20 @@ export default class NotePage extends Component {
   deleteNote() {
     return API.del("notes", `/notes/${this.props.match.params.id}`);
   }
-  
+
   handleDelete = async event => {
     event.preventDefault();
-  
+
     const confirmed = window.confirm(
       "Are you sure you want to delete this note?"
     );
-  
+
     if (!confirmed) {
       return;
     }
-  
+
     this.setState({ isDeleting: true });
-  
+
     try {
       await this.deleteNote();
       this.props.history.push("/");
@@ -123,7 +123,7 @@ export default class NotePage extends Component {
       this.setState({ isDeleting: false });
     }
   }
-  
+
   render() {
     return (
       <div className="notes">

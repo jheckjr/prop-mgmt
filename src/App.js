@@ -6,18 +6,16 @@ import { Auth } from 'aws-amplify';
 import Routes from './routes';
 import './App.css';
 
-export default withRouter(App);
-
 class App extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       isAuthenticated: false,
       isAuthenticating: true
     };
   }
-  
+
   async componentDidMount() {
     try {
       await Auth.currentSession();
@@ -29,23 +27,23 @@ class App extends React.Component {
     }
     this.setState({ isAuthenticating: false });
   }
-  
+
   userHasAuthenticated = authenticated => {
     this.setState({ isAuthenticated: authenticated });
   }
-  
+
   handleLogout = async event => {
     await Auth.signOut();
     this.userHasAuthenticated(false);
     this.props.history.push('/login');
   }
-  
+
   render() {
     const childProps = {
       isAuthenticated: this.state.isAuthenticated,
       userHasAuthenicated: this.state.userHasAuthenticated,
     };
-    
+
     return (
       !this.state.isAuthenticating &&
       <div className="App container">
@@ -77,3 +75,5 @@ class App extends React.Component {
     );
   }
 }
+
+export default withRouter(App);

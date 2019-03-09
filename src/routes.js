@@ -20,5 +20,5 @@ export default function Routes({ childProps }) {
       <AuthenticatedRoute path="/notes/:id" exact component={NotePage} props={childProps} />
       <Route component={NotFoundPage} />
     </Switch>
-  ); 
+  );
 }
