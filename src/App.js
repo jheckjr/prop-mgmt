@@ -70,7 +70,15 @@ class App extends React.Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <Routes childProps={childProps}/>
+        <React.Fragment>
+          <aside>
+            <ul>
+              <li>Properties</li>
+              <li>Income/Expenses</li>
+            </ul>
+          </aside>
+          <Routes childProps={childProps}/>
+        </React.Fragment>
       </div>
     );
   }

@@ -52,20 +52,21 @@ export default class HomePage extends Component {
               return <PropertyCard key={idx} />
             })
           }
+          <LinkContainer
+              key="new"
+              to="/transactions/new"
+            >
+              <ListGroupItem>
+                <h4>
+                  <b>{"\uFF0B"}</b> Create a new transaction
+                </h4>
+              </ListGroupItem>
+            </LinkContainer>
         </div>
       );
     }
 
-    return (
-      <React.Fragment>
-        <aside>
-          <ul>
-            <li>Home</li>
-          </ul>
-        </aside>
-        { propertiesContent }
-      </React.Fragment>
-    );
+    return propertiesContent;
   }
 
   renderNotesList(notes) {
