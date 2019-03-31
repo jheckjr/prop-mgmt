@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import { Auth } from 'aws-amplify';
 import Routes from './routes';
+import SideBarNav from './components/sidebar-navigation';
 import './App.css';
 
 class App extends React.Component {
@@ -71,12 +72,7 @@ class App extends React.Component {
           </Navbar.Collapse>
         </Navbar>
         <React.Fragment>
-          <aside>
-            <ul>
-              <li>Properties</li>
-              <li>Income/Expenses</li>
-            </ul>
-          </aside>
+          <SideBarNav/>
           <Routes childProps={childProps}/>
         </React.Fragment>
       </div>

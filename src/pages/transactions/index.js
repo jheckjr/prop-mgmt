@@ -14,15 +14,20 @@ export default class TransactionsPage extends React.Component {
   render() {
     return (
       <div>
+        <a href="/transactions/new">New Transaction</a>
         <table>
-          <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Property</th>
-            <th>Amount</th>
-          </tr>
-          <TransactionItem/>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Property</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <TransactionItem/>
+          </tbody>
         </table>
       </div>
     );
